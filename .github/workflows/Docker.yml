@@ -12,6 +12,7 @@ on:
   pull_request:
     paths:
       - Dockerfile
+      - .github/workflows/Docker.yml
 
 env:
   workflow_image: nadekobot
