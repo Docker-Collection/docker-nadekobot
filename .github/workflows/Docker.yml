@@ -14,8 +14,16 @@ on:
       - Dockerfile
       - .github/workflows/Docker.yml
 
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
 env:
-  workflow_image: nadekobot
+  ghcr_docker: ghcr.io/docker-collection/nadekobot
 
 jobs:
   Test:
@@ -37,7 +45,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: false
           tags: |
-            ghcr.io/docker-collection/${{ env.workflow_image }}:test
+            ${{ env.ghcr_docker }}:test
 
   Push:
     runs-on: ubuntu-latest
@@ -75,15 +83,28 @@ jobs:
           echo "Current image version is $image_version"
           echo "::set-output name=image_version::$version"
 
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@12cce9efe0d49980455aaaca9b071c0befcdd702 # tag=v4.1.0
+        with:
+          images: |
+            ${{ env.ghcr_docker }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}},value=${{ steps.get_version.outputs.image_version }}
+          labels: |
+            org.opencontainers.image.authors=Efina
+            org.opencontainers.image.title=Docker Nadekobot
+            org.opencontainers.image.description=Nadekobot rebuild version for arm
+
       - name: Build & Push
         uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5 # tag=v3.2.0
         with:
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            ghcr.io/docker-collection/${{ env.workflow_image }}:latest
-            ghcr.io/docker-collection/${{ env.workflow_image }}:${{ steps.get_version.outputs.image_version }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
