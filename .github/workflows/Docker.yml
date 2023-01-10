@@ -34,4 +34,3 @@ jobs:
       docker_label_description: ${{ env.label_description_docker }}
       version_detecter: true
       version_detecter_var: "NADEKO_VERSION="
-      build_args: ${{ env.build_args }}
