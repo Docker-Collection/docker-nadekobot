@@ -34,7 +34,7 @@ RUN set -xe; \
     chmod +x /app/NadekoBot
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:6.0@sha256:62229784982a766e1d2a096c57ff9dccd6f49798f6dfab851f3c0c0f5f1c4102
+FROM mcr.microsoft.com/dotnet/runtime:6.0@sha256:c3b823a4a6b4db4340f950e76462704323fe71636f36dc1efe63346d7ba62964
 WORKDIR /app
 
 COPY --from=build /app ./
