@@ -10,7 +10,7 @@ RUN apk add git curl && \
     mkdir /app && \
     curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /app/youtube-dl
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:70dcd7f13bd2ddc6108a8ab5d1d0f6f67adba89ef989ec98e18bda9968961856 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:58cbcd2b7947cd770402492a588d37f0696ac5b8cbf320b4611e48ce7d1a8314 AS build
 WORKDIR /source
 
 COPY --from=nadeko-source /nadeko/src/Nadeko.Medusa/*.csproj src/Nadeko.Medusa/
@@ -34,7 +34,7 @@ RUN set -xe; \
     chmod +x /app/NadekoBot
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:6.0@sha256:d1de221f1b2af79a59b8e61e192f315c4a72993f88e560a8ac585e848ed857d5
+FROM mcr.microsoft.com/dotnet/runtime:6.0@sha256:a579915e4f0e16d389b69b5de630bdd8e775bb9ca441700f3f72277a1fee6522
 WORKDIR /app
 
 COPY --from=build /app ./
