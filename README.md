@@ -1,8 +1,10 @@
 # Docker Nadekobot
 
-A rebuild [Nadekobot](https://gitlab.com/Kwoth/nadekobot) image for arm.
+~~A rebuild [Nadekobot](https://gitlab.com/Kwoth/nadekobot) image for arm.~~
 
-Original Dockerfile on NadekoBotV4, for normal x86_64 docker!
+~~Original Dockerfile on NadekoBotV4, for normal x86_64 docker!~~
+
+Current can't build arm64 image.
 
 ## Docker Compose
 
