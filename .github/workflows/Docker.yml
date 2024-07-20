@@ -28,4 +28,4 @@ jobs:
       docker_label_description: "Nadekobot rebuild version for arm"
       version_detecter: true
       version_detecter_var: "NADEKO_VERSION="
-      platforms: "linux/amd64"
+      # platforms: "linux/amd64"
