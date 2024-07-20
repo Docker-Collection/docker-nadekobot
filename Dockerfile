@@ -6,10 +6,13 @@ WORKDIR /nadeko
 ARG NADEKO_VERSION=5.1.4
 
 RUN apk add git curl && \
-    git clone https://gitlab.com/Kwoth/nadekobot.git --branch=${NADEKO_VERSION} . && \
-    mkdir /app && \
-    curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /app/youtube-dl && \
-    ls -alh && pwd
+    git clone https://gitlab.com/Kwoth/nadekobot.git --branch=${NADEKO_VERSION} .
+
+COPY add_nuget_audit.sh /nadeko/
+
+RUN chmod +x add_nuget_audit.sh && \
+    ./add_nuget_audit.sh && \
+    rm add_nuget_audit.sh
 
 # Build NadekoBot
 FROM mcr.microsoft.com/dotnet/sdk:8.0@sha256:35792ea4ad1db051981f62b313f1be3b46b1f45cadbaa3c288cd0d3056eefb83 AS build
