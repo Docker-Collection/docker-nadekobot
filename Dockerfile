@@ -15,7 +15,7 @@ RUN apk add git curl && \
 #     rm add_nuget_audit.sh
 
 # Build NadekoBot
-FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:c6a6d7995042bc8905825c2f1e2f8717733e90738a09fb0d30f917596f4bcb10 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:7d24e90a392e88eb56093e4eb325ff883ad609382a55d42f17fd557b997022ca AS build
 WORKDIR /source
 
 # Copy the .csproj files for each project
@@ -45,7 +45,7 @@ RUN set -xe; \
     chmod +x /app/NadekoBot
 
 # Final Image
-FROM mcr.microsoft.com/dotnet/runtime:9.0@sha256:f7bc5405c6e52045c6591f5ed8ca3c0a0eb205c0afea5d350edd29713ac219f0
+FROM mcr.microsoft.com/dotnet/runtime:9.0@sha256:1e5eb0ed94ca96a34a914456db80e48bd1bb7bc3e3c8eda5e2c3d89c153c3081
 WORKDIR /app
 
 # Create a new user, install dependencies, and set up sudoers file
