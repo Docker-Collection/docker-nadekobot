@@ -3,7 +3,7 @@ FROM alpine:3.23.3@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f
 WORKDIR /nadeko
 
 # renovate: datasource=gitlab-tags depName=Kwoth/nadekobot
-ARG NADEKO_VERSION=5.1.4
+ARG NADEKO_VERSION=5.3.9
 
 RUN apk add git curl && \
     git clone https://gitlab.com/Kwoth/nadekobot.git --branch=${NADEKO_VERSION} .
