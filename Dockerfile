@@ -45,7 +45,7 @@ RUN set -xe; \
     chmod +x /app/NadekoBot
 
 # Final Image
-FROM mcr.microsoft.com/dotnet/runtime:10.0@sha256:3de49150e48790fa845547e14bff5add0e4194a8901e727cf88f83423bcbe2b0
+FROM mcr.microsoft.com/dotnet/runtime:10.0@sha256:20c8b96cccff81d140c32ada512417f1c42248b64f54a80a319311b813a9dfb4
 WORKDIR /app
 
 # Create a new user, install dependencies, and set up sudoers file
