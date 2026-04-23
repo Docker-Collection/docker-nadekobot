@@ -20,7 +20,7 @@ concurrency:
 jobs:
   docker:
     name: docker build
-    uses: Docker-Collection/reusable-workflows/.github/workflows/docker-build.yml@main
+    uses: Docker-Collection/reusable-workflows/.github/workflows/docker-build.yml@9997a1ae3a6f599ba1b582c98f28c961676696da # main
     with:
       docker_name: "ghcr.io/docker-collection/nadekobot"
       docker_label_author: "Efina"
